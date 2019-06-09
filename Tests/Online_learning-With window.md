@@ -55,9 +55,7 @@ y = df['class']
 ```
 
 ```python
-def sliding_prequential(n_init_tr, model, X, y, w):
-    pred_match=[]
-    accuracy = []
+def prequential(n_init_tr, model, X, y, w):
     y_pred = []
     
     row_n = y.shape[0]
@@ -67,15 +65,14 @@ def sliding_prequential(n_init_tr, model, X, y, w):
         yn = y.iloc[:n_init_tr+i]
         if w>(n_init_tr+i):
             model.fit(Xn, yn)
-            y_new = model.predict(X.iloc[n_init_tr+i,:].values.reshape(1,-1))
-            pred_match.append(y_new == y.iloc[n_init_tr+i])
+            y_pred.append(model.predict(X.iloc[n_init_tr+i,:].values.reshape(1,-1)))
         else:
             model.fit(Xn.iloc[-w:,:], yn.iloc[-w:])
-            y_new = model.predict(X.iloc[n_init_tr+i,:].values.reshape(1,-1))
-            pred_match.append(y_new == y.iloc[n_init_tr+i])
-        accuracy.append(sum(pred_match)/len(pred_match))
-    print('Average accuracy:', sum(accuracy)/len(accuracy))
-    plt.plot(accuracy,'-')
+            y_pred.append(model.predict(X.iloc[n_init_tr+i,:].values.reshape(1,-1)))
+        
+    pred_match = np.equal(np.array(y_pred).reshape(1,-1), y[n_init_tr:].values.reshape(1,-1))
+    accuracy = np.cumsum(pred_match)/np.arange(1, pred_match.shape[1]+1)
+    return accuracy, y_pred, y[n_init_tr:]
 ```
 
 ```python
@@ -90,16 +87,20 @@ xgb = XGBClassifier()
 ```
 
 ```python
-models = [nb]
+lr_res = prequential(40000, lr, X, y, 2000)
 ```
 
 ```python
-for model in models:
-    display(sliding_prequential(2500, model, X, y, 5000))
+plt.plot(lr_res)
+plt.xticks([])
+plt.legend('Logistic Regression')
 ```
 
 ```python
-from prequential import prequential
 
-prequential(X, y, nb, n_train=2000)
+```
+
+```python
+toplo = sliding_prequential2(42000, model, X, y, 2000)
+plt.plot(toplo)
 ```
