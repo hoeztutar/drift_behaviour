@@ -36,7 +36,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 #import xgboost as xgb
 from sklearn.ensemble import GradientBoostingClassifier
-
+from sklearn.tree import DecisionTreeClassifier
 import arff
 
 from sklearn.preprocessing import LabelEncoder
@@ -54,14 +54,6 @@ df.head()
 
 ```python
 df.describe()
-```
-
-```python
-#sns.pairplot(df, hue='class')
-```
-
-```python
-plt.scatter(df.date, df.transfer)
 ```
 
 ### Preprocess
@@ -115,10 +107,6 @@ print("Cross-validation scores: {}".format(scores))
 
 ### Grid Search
 
-```
-
-```
-
 ```python
 param_grid = {
     'kernel': ['rbf', 'poly', 'sigmoid'], 
@@ -155,13 +143,13 @@ print("Cross-validation scores: {}".format(scores))
 
 ```python
 param_grid = {
-    'C': [0.001, 0.01, 0.1, 1, 10, 100],
-    'penalty':['l1', 'l2']
+    'C': [i for i in range(10, 51, 10)],
     }
 
-grid = GridSearchCV(LogisticRegression(), param_grid, cv=5)
+grid = GridSearchCV(LogisticRegression(solver='sag', max_iter=3000), param_grid, cv=5)
 grid.fit(train_X, train_y)
-grid.score(val_X, val_y)
+print("Score:", grid.score(val_X, val_y))
+print("The best parameters:",grid.best_params_)
 ```
 
 ### Model Deployment & Evaluation
@@ -175,4 +163,15 @@ print("Test set score: {:.3f}".format(logreg.score(val_X, val_y)))
 
 scores = cross_val_score(logreg, X, y, cv=5)
 print("Cross-validation scores: {}".format(scores))
+```
+
+```python
+param_grid = {
+    'n_estimators': [i for i in range(10, 75, 5)]
+    }
+
+grid = GridSearchCV(RandomForestClassifier(random_state=42), param_grid, cv=5)
+grid.fit(train_X, train_y)
+print("Score:", grid.score(val_X, val_y))
+print("The best parameters:",grid.best_params_)
 ```
