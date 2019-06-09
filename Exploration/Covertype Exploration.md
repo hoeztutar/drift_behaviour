@@ -62,3 +62,7 @@ df.info()
 for i in df:
     print(i, df[i].nunique())
 ```
+
+```python
+plt.plot(df.index.sort_values(), df['class'], '.')
+```
