@@ -1,4 +1,9 @@
-EvaluatePrequential -l meta.PairedLearners -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/elec_preprocessed.arff) -e (BasicClassificationPerformanceEvaluator -o) -f 100 -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/elec/pl.csv
+EvaluatePrequential -l meta.PairedLearners 
+-s (ArffFileStream 
+-f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/elec_preprocessed.arff) 
+-e (BasicClassificationPerformanceEvaluator -o -p -r -f) 
+-f 100 -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/elec/pl.csv
+
 EvaluatePrequential -l (drift.SingleClassifierDrift -d SeqDrift2ChangeDetector) -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/elec_preprocessed.arff) -e (BasicClassificationPerformanceEvaluator -o) -f 100 -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/elec/seqdrift2.csv
 EvaluatePrequential -l (drift.SingleClassifierDrift -d STEPD) -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/elec_preprocessed.arff) -e (BasicClassificationPerformanceEvaluator -o) -f 100 -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/elec/stepd.csv
 EvaluatePrequential -l (drift.SingleClassifierDrift -d RDDM) -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/elec_preprocessed.arff) -e (BasicClassificationPerformanceEvaluator -o) -f 100 -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/elec/rddm.csv
