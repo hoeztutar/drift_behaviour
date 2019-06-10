@@ -1,0 +1,53 @@
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l meta.PairedLearners \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/pl.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d SeqDrift2ChangeDetector) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/seqdrift2.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d STEPD) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/stepd.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d RDDM) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/rddm.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d PageHinkleyDM) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/pht.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d EDDM) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/eddm.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d DDM) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/ddm.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d CusumDM) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/cusum.csv"
+
+java -cp moa.jar -javaagent:sizeofag-1.0.4.jar moa.DoTask \
+"EvaluatePrequential -l (drift.SingleClassifierDrift -d (ADWINChangeDetector -a 0.01)) \
+    -s (ArffFileStream -f /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/data/covtypeNorm.arff) \
+    -e (BasicClassificationPerformanceEvaluator -o -p -r -f) -f 100 \
+    -d /Users/Feranor/Uni.li/Thesis/Thesis/drift_behaviour/moa_outputs/outputs/covertype/adwin.csv"
