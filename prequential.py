@@ -2,6 +2,7 @@ from time import clock
 
 import numpy as np
 import pandas as pd
+from tqdm import tnrange, tqdm_notebook
 
 def prequential(n_init_tr, model, X, y, w):
     y_pred = []
