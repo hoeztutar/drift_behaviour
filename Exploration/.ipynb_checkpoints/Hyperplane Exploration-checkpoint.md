@@ -47,15 +47,11 @@ df.groupby('class')['class'].count()
 ```
 
 ```python
-f, axes = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(15,10))
+f, ax = plt.subplots(5,2)
 
-for i in range(2):
-    sns.distplot(df[df['class']=='class1'].loc[:10000,'att'+str(i+1)], ax=axes[0,i], label='class1')
-    sns.distplot(df[df['class']=='class2'].loc[:10000,'att'+str(i+1)], ax=axes[0,i], label='class2')
-    sns.distplot(df[df['class']=='class1'].loc[40000:,'att'+str(i+1)], ax=axes[1,i], label='class1')
-    sns.distplot(df[df['class']=='class2'].loc[40000:,'att'+str(i+1)], ax=axes[1,i], label='class2')
-
-plt.legend()
+for t in range(2):
+    for i in range(5):
+        sns.distplot(df.iloc[:,i], ax=ax[i,t])
 ```
 
 ```python
