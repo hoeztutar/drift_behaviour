@@ -22,7 +22,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 plt.style.use('seaborn-notebook')
 from matplotlib import rcParams
-rcParams['figure.figsize'] = (5, 3)
 rcParams['figure.dpi'] = 150
 ```
 
@@ -36,6 +35,15 @@ df.head()
 
 ```python
 df.describe()
+```
+
+```python
+for i in  df.columns:
+    print(i)
+```
+
+```python
+df.info()
 ```
 
 ```python
