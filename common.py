@@ -11,7 +11,7 @@ def import_arff(path):
     return df
 
 def test3(estimator, df):    
-    sizes = [0.5, 0.6, 0.7, 0.8, 0.9]
+    sizes = [0.5, 0.4, 0.3, 0.2, 0.1]
 
     dict_ = {'acc': [], 
              'precision': [],
@@ -21,18 +21,20 @@ def test3(estimator, df):
             }
 
     for i, size in enumerate(sizes, start=1):
-        train_X, test_X, train_y, test_y = train_test_split(df.iloc[:,:-1], df.iloc[:,-1], shuffle=False, train_size=size)
+        train_X, test_X, train_y, test_y = train_test_split(df.iloc[:,:-1], df.iloc[:,-1], shuffle=False, test_size=size)
 
         estimator.fit(train_X, train_y)
         pred = estimator.predict(test_X)
 
         dict_['acc'].append(accuracy_score(test_y, pred))
-        dict_['precision'].append(precision_score(test_y, pred))
-        dict_['recall'].append(recall_score(test_y, pred))
+        dict_['precision'].append(precision_score(test_y, pred, average='weighted'))
+        dict_['recall'].append(recall_score(test_y, pred, average='weighted'))
         dict_['kappa'].append(cohen_kappa_score(test_y, pred))
-        dict_['f1'].append(f1_score(test_y, pred))
+        dict_['f1'].append(f1_score(test_y, pred, average='weighted'))
 
-        print('{} of {} is complete'.format(i, len(sizes)))
+        estimator_name = estimator.__class__.__name__
 
-    results = pd.DataFrame(dict_, index=sizes)
+        print('{} of {} is completed for {}'.format(i, len(sizes), estimator_name))
+
+    results = pd.DataFrame(dict_, index=[[estimator_name]*len(sizes), [1-i for i in sizes]])
     return results
