@@ -1,0 +1,6 @@
+/archive
+.ipnyb_checkpoints
+/.vscode
+exploration/.ipynb_checkpoints
+moa_outputs/.ipynb_checkpoints
+tests/.ipynb_checkpoints
