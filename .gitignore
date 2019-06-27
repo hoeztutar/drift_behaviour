@@ -1,5 +1,5 @@
 /archive
-.ipnyb_checkpoints
+/.ipnyb_checkpoints
 */.ipynb_checkpoints/*
 /.vscode
 exploration/.ipynb_checkpoints
